@@ -3,7 +3,7 @@ module ActiveRecordUpsert
     module Persistence
       def _upsert_record(values, on_duplicate)
         set_timestamps(values)
-        set_primary_key_value(values)
+        set_primary_key_value(values) unless composite?
 
         im = compile_insert(values, on_duplicate)
         connection.insert(im, "#{self} Upsert", primary_key || false, values[primary_key])
@@ -40,6 +40,11 @@ module ActiveRecordUpsert
 
         im.on_duplicate_update(on_duplicate)
         im
+      end
+
+      def composite?
+        return false unless defined?(super)
+        super
       end
     end
   end

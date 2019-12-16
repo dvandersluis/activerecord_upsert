@@ -1,14 +1,25 @@
 sudo: false
 language: ruby
+services:
+  - mysql
 cache:
   - bundler
+env:
+  - MYSQL_USERNAME=root MYSQL_PASSWORD=
 rvm:
-  - 2.2.9
   - 2.3.8
-  - 2.4.6
-  - 2.5.5
-  - 2.6.3
-  - 2.7.0.preview2
+  - 2.4.9
+  - 2.5.7
+  - 2.6.5
+  - 2.7.0.preview3
+gemfile:
+  - Gemfile
+  - .travis/gemfiles/Gemfile-no-cpk
+before_install:
+  - gem install bundler -v 2.0.2
+  - mysql -e 'CREATE DATABASE active_record_upsert_test;'
 matrix:
   allow_failures:
-    - rvm: 2.7.0.preview1
+    - rvm: 2.7.0.preview3
+
+

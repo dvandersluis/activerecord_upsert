@@ -33,5 +33,16 @@ RSpec.describe ActiveRecordUpsert::ActiveRecord do # rubocop:disable RSpec/FileP
         expect(book.count).to eq(1)
       end
     end
+
+    context 'with composite_primary_keys', composite: true do
+      it do
+        registration = Registration.create!(user_id: 1, course_id: 2)
+        Registration.where(user_id: 1, course_id: 2).upsert("grade = 'A+'")
+
+        expect(Registration.count).to eq(1)
+
+        expect { registration.reload }.to change { registration.grade }.from(nil).to('A+')
+      end
+    end
   end
 end

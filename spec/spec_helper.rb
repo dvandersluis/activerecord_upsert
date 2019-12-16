@@ -1,6 +1,9 @@
 require 'bundler/setup'
 require 'activerecord_upsert'
+
+require 'active_record'
 require 'database_cleaner'
+require 'pry'
 
 RSpec.configure do |config|
   config.expect_with(:rspec) do |expectations|
@@ -17,6 +20,12 @@ RSpec.configure do |config|
   config.example_status_persistence_file_path = '.rspec_status'
   config.disable_monkey_patching!
 
+  begin
+    require 'composite_primary_keys'
+  rescue LoadError
+    config.filter_run_excluding(composite: true)
+  end
+
   config.order = :random
   Kernel.srand(config.seed)
 
@@ -32,8 +41,6 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
-
-require 'active_record'
 
 ActiveRecord::Base.establish_connection(
   adapter: 'mysql2',
