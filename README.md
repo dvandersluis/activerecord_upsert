@@ -1,5 +1,6 @@
 # ActiveRecord Upsert
 
+[![Build Status](https://travis-ci.org/dvandersluis/activerecord_upsert.svg?branch=master)](https://travis-ci.org/dvandersluis/activerecord_upsert)
 [![Gem Version](https://badge.fury.io/rb/activerecord_upsert.svg)](https://badge.fury.io/rb/activerecord_upsert)
 
 Adds the ability to use MySQL's `ON DUPLICATE KEY UPDATE` to upsert records in ActiveRecord.
