@@ -3,4 +3,5 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in activerecord_upsert.gemspec
 gemspec
 
-gem 'composite_primary_keys', '~> 11.2'
+gem 'activerecord', '~> 6.0.2.1'
+gem 'composite_primary_keys', '~> 12.0'
