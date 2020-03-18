@@ -3,9 +3,9 @@
 [![Build Status](https://travis-ci.org/dvandersluis/activerecord_upsert.svg?branch=master)](https://travis-ci.org/dvandersluis/activerecord_upsert)
 [![Gem Version](https://badge.fury.io/rb/activerecord_upsert.svg)](https://badge.fury.io/rb/activerecord_upsert)
 
-Adds the ability to use MySQL's `ON DUPLICATE KEY UPDATE` to upsert records in ActiveRecord.
+Adds the ability to use MySQL's `ON DUPLICATE KEY UPDATE` with arbitrary values in order to upsert records in ActiveRecord.
 
-**Note**: This will conflict with Rails 6, which adds its own upsert, so requires Rails 5.2 currently. 
+Supports Rails 5.2 and 6, and should not conflict with Rails 6's `Model.upsert` or `Model.upsert_all`, because this gem adds `upsert` to `ActiveRecord::Relation`.
 
 ## Installation
 

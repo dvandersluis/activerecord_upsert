@@ -1,4 +1,5 @@
-sudo: false
+os: linux
+
 language: ruby
 services:
   - mysql
@@ -11,15 +12,22 @@ rvm:
   - 2.4.9
   - 2.5.7
   - 2.6.5
-  - 2.7.0.preview3
+  - 2.7.0
 gemfile:
-  - Gemfile
-  - .travis/gemfiles/Gemfile-no-cpk
+  - .travis/gemfiles/rails5.gemfile
+  - .travis/gemfiles/rails5-no-cpk.gemfile
+  - .travis/gemfiles/rails6.gemfile
+  - .travis/gemfiles/rails6-no-cpk.gemfile
 before_install:
   - gem install bundler -v 2.0.2
   - mysql -e 'CREATE DATABASE active_record_upsert_test;'
 matrix:
-  allow_failures:
-    - rvm: 2.7.0.preview3
-
-
+  exclude:
+    - rvm: 2.3.8
+      gemfile: .travis/gemfiles/rails6.gemfile
+    - rvm: 2.3.8
+      gemfile: .travis/gemfiles/rails6-no-cpk.gemfile
+    - rvm: 2.4.9
+      gemfile: .travis/gemfiles/rails6.gemfile
+    - rvm: 2.4.9
+      gemfile: .travis/gemfiles/rails6-no-cpk.gemfile
